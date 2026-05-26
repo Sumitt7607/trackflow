@@ -1,4 +1,4 @@
-const turf = require('@turf/turf');
+const turf = require('./turf');
 
 /**
  * Format custom LatLng coords from DB to turf-compatible [lng, lat] array

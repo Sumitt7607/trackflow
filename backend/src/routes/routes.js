@@ -1,7 +1,7 @@
 const express = require('express');
 const Route = require('../models/Route');
 const { protect, authorize } = require('../middleware/auth');
-const turf = require('@turf/turf');
+const turf = require('../utils/turf');
 
 const router = express.Router();
 

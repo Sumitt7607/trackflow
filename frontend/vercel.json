@@ -1,7 +1,23 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/api/:path*",
+      "destination": "https://trackflow-self.vercel.app/api/:path*"
+    },
+    {
+      "source": "/socket.io/:path*",
+      "destination": "https://trackflow-self.vercel.app/socket.io/:path*"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "https://trackflow-self.vercel.app/uploads/:path*"
+    },
+    {
+      "source": "/((?!api|socket.io|uploads).*)/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/((?!api|socket.io|uploads).*)",
       "destination": "/index.html"
     }
   ]

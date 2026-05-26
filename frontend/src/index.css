@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Use dynamic viewport on iOS/Android */
+    height: 100dvh;
+  }
+  body {
+    @apply antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+  /* Prevent double-tap zoom on buttons */
+  button, a {
+    touch-action: manipulation;
+  }
+}
+
+/* ── Custom Scrollbar ─────────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { @apply bg-transparent; }
+::-webkit-scrollbar-thumb  { @apply bg-slate-300 rounded-full dark:bg-slate-700; }
+::-webkit-scrollbar-thumb:hover { @apply bg-slate-400 dark:bg-slate-600; }
+
+/* ── Mobile safe-area bottom padding ─────────── */
+.safe-area-pb {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ── Hide scrollbar but keep scroll functionality ─ */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Leaflet overrides ────────────────────────── */
+.leaflet-container {
+  font-family: inherit;
+  z-index: 10;
+}
+.leaflet-popup-content-wrapper {
+  @apply rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 dark:bg-slate-900;
+}
+.leaflet-popup-content {
+  margin: 12px 16px;
+  @apply dark:text-slate-200;
+}
+.leaflet-control-zoom {
+  border: none !important;
+  @apply shadow-lg !important;
+}
+.leaflet-control-zoom a {
+  @apply bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors !important;
+  border-color: transparent !important;
+}
+.leaflet-control-zoom a:first-child { @apply rounded-t-xl !important; }
+.leaflet-control-zoom a:last-child  { @apply rounded-b-xl !important; }
+
+/* ── Pulse glow for SOS / alerts ─────────────── */
+@keyframes glow-red {
+  0%, 100% { box-shadow: 0 0 12px 2px rgba(239,68,68,0.5); }
+  50%       { box-shadow: 0 0 24px 6px rgba(239,68,68,0.9); }
+}
+.glow-red { animation: glow-red 1.4s ease-in-out infinite; }
+
+/* ── Smooth card hover ────────────────────────── */
+.card-hover {
+  @apply transition-all duration-200;
+}
+.card-hover:hover {
+  @apply -translate-y-0.5 shadow-lg;
+}
+
+/* ── Glass card ───────────────────────────────── */
+.glass {
+  @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-white/20 dark:border-slate-700/40;
+}

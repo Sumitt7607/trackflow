@@ -25,13 +25,20 @@ app.set('io', io);
 const startServer = async () => {
   try {
     await connectDB();
-    server.listen(PORT, () => {
-      console.log(`TrackFlow Backend listening on port ${PORT}`);
-    });
+    // Only start listening if we are not running in a serverless environment (like Vercel)
+    if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+      server.listen(PORT, () => {
+        console.log(`TrackFlow Backend listening on port ${PORT}`);
+      });
+    } else {
+      console.log('Running in serverless environment - database connected');
+    }
   } catch (error) {
     console.error('Server startup failed:', error.message);
-    process.exit(1);
+    // Do not call process.exit(1) in a serverless environment to prevent container crashes
   }
 };
 
 startServer();
+
+module.exports = app;

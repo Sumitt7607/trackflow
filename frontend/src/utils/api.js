@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   timeout: 15000,
 });
 
@@ -68,7 +68,8 @@ api.interceptors.response.use(
 
       try {
         // Direct call to axios.post to prevent infinite interceptor loops
-        const { data } = await axios.post('/api/auth/refresh', { refreshToken });
+        const refreshUrl = `${import.meta.env.VITE_API_URL || '/api'}/auth/refresh`;
+        const { data } = await axios.post(refreshUrl, { refreshToken });
 
         if (data.success) {
           localStorage.setItem('trackflow_token', data.token);

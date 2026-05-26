@@ -15,7 +15,8 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (!token || !user) return;
 
-    const socket = io(window.location.origin, {
+    const socketUrl = import.meta.env.VITE_SOCKET_URL || window.location.origin;
+    const socket = io(socketUrl, {
       auth: { token },
       transports: ['websocket', 'polling'],
     });

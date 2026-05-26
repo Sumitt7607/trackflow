@@ -1,0 +1,18 @@
+{
+  "short_name": "TrackFlow",
+  "name": "TrackFlow Field Tracker",
+  "description": "Real-time employee field force tracking and productivity analytics",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/854/854878.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "theme_color": "#8b5cf6",
+  "display": "standalone",
+  "orientation": "portrait"
+}

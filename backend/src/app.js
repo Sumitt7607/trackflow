@@ -25,7 +25,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/', apiLimiter);
 
 // Serve uploads static folder
-app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
+// On Vercel, only /tmp is writable, so serve from /tmp/uploads in production
+const uploadsDir = process.env.VERCEL
+  ? '/tmp/uploads'
+  : path.join(__dirname, '../../uploads');
+app.use('/uploads', express.static(uploadsDir));
 
 // Routes
 app.use('/api/auth', authRoutes);

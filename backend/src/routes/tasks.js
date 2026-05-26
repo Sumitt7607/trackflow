@@ -8,7 +8,10 @@ const { protect, authorize } = require('../middleware/auth');
 const router = express.Router();
 
 // Ensure upload directory exists
-const uploadDir = path.join(__dirname, '../../../uploads');
+// On Vercel, only /tmp is writable. Use /tmp/uploads in production.
+const uploadDir = process.env.VERCEL
+  ? '/tmp/uploads'
+  : path.join(__dirname, '../../../uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
